@@ -3,10 +3,10 @@ const cuentaCarritoElement = document.getElementById("cuenta-carrito");
 /** Toma un objeto producto o un objeto con al menos un ID y lo agrega al carrito */
 function agregarAlCarrito(producto){
   //Reviso si el producto está en el carrito.
-  let memoria = JSON.parse(localStorage.getItem("productos"));
+  let memoriaLocal = JSON.parse(localStorage.getItem("productos"));
   let cantidadProductoFinal;
   //Si no hay localstorage lo creo
-  if(!memoria || memoria.length === 0) {
+  if(!memoriaLocal || memoriaLocal.length === 0) {
     const nuevoProducto = getNuevoProductoParaMemoria(producto)
     localStorage.setItem("productos",JSON.stringify([nuevoProducto]));
     actualizarNumeroCarrito();
@@ -14,8 +14,8 @@ function agregarAlCarrito(producto){
   }
   else {
     //Si hay localstorage me fijo si el artículo ya está ahí
-    const indiceProducto = memoria.findIndex(prod => prod.id === producto.id)
-    const nuevaMemoria = memoria;
+    const indiceProducto = memoriaLocal.findIndex(prod => prod.id === producto.id)
+    const nuevaMemoria = memoriaLocal;
     //Si el producto no está en el carrito lo agrego
     if(indiceProducto === -1){
       const nuevoProducto = getNuevoProductoParaMemoria(producto);
@@ -34,10 +34,10 @@ function agregarAlCarrito(producto){
 
 /** Resta una unidad de un producto del carrito */
 function restarAlCarrito(producto){
-  let memoria = JSON.parse(localStorage.getItem("productos"));
+  let memoriaLocal = JSON.parse(localStorage.getItem("productos"));
   let cantidadProductoFinal = 0;
-  const indiceProducto = memoria.findIndex(prod => prod.id === producto.id)
-  let nuevaMemoria = memoria;
+  const indiceProducto = memoriaLocal.findIndex(prod => prod.id === producto.id)
+  let nuevaMemoria = memoriaLocal;
   nuevaMemoria[indiceProducto].cantidad--;
   cantidadProductoFinal = nuevaMemoria[indiceProducto].cantidad;
   if(cantidadProductoFinal === 0){
@@ -58,9 +58,9 @@ function getNuevoProductoParaMemoria(producto){
 /** Actualiza el número del carrito del header */
 function actualizarNumeroCarrito(){
   let cuenta = 0;
-  const memoria = JSON.parse(localStorage.getItem("productos"));
-  if(memoria && memoria.length > 0){
-    cuenta = memoria.reduce((acum, current)=>acum+current.cantidad,0)
+  const memoriaLocal = JSON.parse(localStorage.getItem("productos"));
+  if(memoriaLocal && memoriaLocal.length > 0){
+    cuenta = memoriaLocal.reduce((acum, current)=>acum+current.cantidad,0)
     return cuentaCarritoElement.innerText = cuenta;
   }
   cuentaCarritoElement.innerText = 0;
