@@ -1,0 +1,40 @@
+body{
+  color: black;
+  background-color: white;
+}
+#cart-container{
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .tarjeta-producto{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    gap: 20px;
+    background-color: #00d9c0;
+  }
+  
+  .tarjeta-producto img{
+    height: 100%;
+  }
+  
+  .tarjeta-producto h3{
+    width: 130px;
+  }
+  .tarjeta-producto div{
+    background-color: white;
+    padding: 3px;
+    border-radius: 5px;
+  }
+  
+  #totales{
+    text-align: center;
+  }
+  
+  #carrito-vacio{
+    text-align: center;
+  }
+body{
+  color: black;
+}
